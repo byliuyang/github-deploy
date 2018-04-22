@@ -21,9 +21,7 @@ router.post('/', function (req, res, next) {
                        exec('git pull', {
                            cwd: repoLocalDir
                        }, (error, stdout, stderr) => {
-                           console.log('error', error);
-                           console.log('stdout', stdout);
-                           console.log('stderr', stderr);
+                           console.log(stdout);
                        });
                     });
                 res.end();
