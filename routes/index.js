@@ -1,10 +1,22 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+
+const fs = require('fs');
 
 /* GET home page. */
 router.post('/', function (req, res, next) {
-    console.log(req.body);
-    res.end();
+    let githubEvent = req.get('X-GitHub-Event');
+
+    switch (githubEvent) {
+        case 'push':
+            let repository = req.body['repository'];
+            fs.readFile('deployment.json', (err, data) => {
+                console.log(repository['full_name']);
+                console.log(data);
+                res.end();
+            });
+            break;
+    }
 });
 
 module.exports = router;
