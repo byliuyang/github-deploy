@@ -10,7 +10,7 @@ router.post('/', function (req, res, next) {
     switch (githubEvent) {
         case 'push':
             let repository = req.body['repository'];
-            fs.readFile('deployment.config.json', (err, data) => {
+            fs.readFile('deployment.config.json', 'utf8', (err, data) => {
                 console.log(repository['full_name']);
                 console.log(data);
                 res.end();
